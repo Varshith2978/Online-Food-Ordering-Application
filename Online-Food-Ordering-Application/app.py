@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 # admin)checks if user is logged in & Checks if user is logged in)
-ADMIN_EMAIL = "admin@gmail.com"
+ADMIN_EMAIL = "      "  #enter your own email---
 
 def is_admin():
     if "user_id" not in session:
@@ -18,14 +18,14 @@ def is_admin():
 
 
 app = Flask(__name__)
-app.secret_key = "varshith-secret"
+app.secret_key = "      "  #enter your own secret---
 
 
 
 
 
 app.config["SQLALCHEMY_DATABASE_URI"] = (
-    "mysql+pymysql://fooduser:foodpass123@localhost/food_app"
+    "mysql+pymysql://fooduser:  /    " #enter your own file locstion-----
 )
 
 
