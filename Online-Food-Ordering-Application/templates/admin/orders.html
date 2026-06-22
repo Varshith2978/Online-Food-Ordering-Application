@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container my-5">
+    <h2>All Orders</h2>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Order ID</th>
+            <th>User ID</th>
+            <th>Total</th>
+            <th>Date</th>
+            <th>Details</th>
+        </tr>
+
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.user.name }}</td>
+            <td>₹{{ order.total }}</td>
+            <td>{{ order.created_at or "N/A" }}</td>
+            <td>
+                <a href="{{ url_for('admin_order_detail', order_id=order.id) }}">
+                    View
+                </a>
+            </td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

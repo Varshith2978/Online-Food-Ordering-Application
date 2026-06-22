@@ -1,0 +1,94 @@
+1. Create Database--------
+CREATE DATABASE food_app;
+USE food_app;
+
+2. Create users table-----------
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    password VARCHAR(255)
+);
+
+
+3. Create products table-----------
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    price INT,
+    image VARCHAR(255)
+);
+
+
+Insert All 12 Products (Correct — FROM YOUR DB)
+✔ Correct order
+✔ Correct names
+✔ Correct pricing
+✔ Correct image paths exactly as your folder
+✔ No mismatching
+✔ This is exactly what your latest DB screenshot shows
+(so no mix‑ups from 7–12)----------------------
+
+UPDATE products SET name='Cheese Chicken Burger', image='products/burger.png' WHERE id=1;
+UPDATE products SET name='Pepperoni Pizza', image='products/pizza.png' WHERE id=2;
+UPDATE products SET name='Chicken Biryani', image='products/biryani.png' WHERE id=3;
+UPDATE products SET name='White Sauce Pasta', image='products/pasta.png' WHERE id=4;
+UPDATE products SET name='French Fries', image='products/fries.png' WHERE id=5;
+UPDATE products SET name='Chicken Shawarma', image='products/shawarma.png' WHERE id=6;
+
+-- Healthy Salad (ID=7)
+UPDATE products SET name='Healthy Salad', image='products/salad.png' WHERE id=7;
+
+-- Veg Noodles (ID=8)
+UPDATE products SET name='Veg Noodles', image='products/noodles.png' WHERE id=8;
+
+-- Vanilla Ice Cream Cup (ID=9)
+UPDATE products SET name='Vanilla Ice Cream Cup', image='products/Ice Cream.png' WHERE id=9;
+
+-- Grilled Sandwich (ID=10)
+UPDATE products SET name='Grilled Sandwich', image='products/sandwich.png' WHERE id=10;
+
+-- Chicken Wings (ID=11)
+UPDATE products SET name='Chicken Wings', image='products/Chicken Wings.png' WHERE id=11;
+
+-- Gulab Jamun (ID=12)
+UPDATE products SET name='Gulab Jamun', image='products/Gulab Jamun.png' WHERE id=12;
+
+5. Create cart_items table----------------
+CREATE TABLE cart_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    product_id INT,
+    quantity INT,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+
+6. Create orders table---------------
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    total INT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+ 7. Create order_items table-------------
+CREATE TABLE order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    price INT,
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+8. type" column to products table----------------
+ALTER TABLE products
+ADD COLUMN type ENUM('veg', 'non-veg') DEFAULT 'veg';
+
+9. Assign correct type (Veg / Non-Veg)-----------------
+UPDATE products SET type='veg' WHERE id IN (1,2,4,5,7,8,9,10,12);
+UPDATE products SET type='non-veg' WHERE id IN (3,6,11);

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+
+<main class="container my-4">
+
+    <h2 class="text-center fw-bold mb-4">Your Cart</h2>
+
+    {% if cart %}
+        <table class="table table-bordered text-center align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>Item</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in cart %}
+                <tr id="row-{{ item.id }}">
+
+                    <!-- Product Image -->
+                    <td>
+                        <img src="{{ url_for('static', filename=item.product.image) }}"
+                             width="70"
+                             class="rounded">
+                    </td>
+
+                    <!-- Product Name -->
+                    <td>{{ item.product.name }}</td>
+
+                    <!-- Quantity Buttons -->
+                    <td>
+                        <button class="btn btn-dark btn-sm"
+                                onclick="decreaseQtyAjax({{ item.id }})">−</button>
+
+                        <span id="qty-{{ item.id }}" class="mx-2 fw-bold">
+                            {{ item.quantity }}
+                        </span>
+
+                        <button class="btn btn-dark btn-sm"
+                                onclick="increaseQtyAjax({{ item.id }})">+</button>
+                    </td>
+
+                    <!-- Price -->
+                    <td>
+                        ₹<span id="price-{{ item.id }}">
+                            {{ item.product.price * item.quantity }}
+                        </span>
+                    </td>
+
+                    <!-- Delete -->
+                    <td>
+                        <button class="btn btn-danger btn-sm"
+                                onclick="deleteItemAjax({{ item.id }})">
+                            ❌
+                        </button>
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Total -->
+        <div class="text-end fw-bold fs-5 mt-3">
+            Total:
+            <span id="total-price">₹{{ total }}</span>
+        </div>
+
+        <!-- Actions -->
+        <div class="d-flex justify-content-between mt-3">
+            <a href="/" class="btn btn-primary">Back to Menu</a>
+            <a href="/checkout" class="btn btn-success">Proceed to Checkout</a>
+        </div>
+
+        <form action="/clear_cart" method="POST" class="text-center mt-3">
+            <button class="btn btn-danger">Clear Cart</button>
+        </form>
+
+    {% else %}
+        <h4 class="text-center text-muted">Your cart is empty.</h4>
+        <div class="text-center mt-3">
+            <a href="/" class="btn btn-primary">Back to Menu</a>
+        </div>
+    {% endif %}
+
+</main>
+
+{% endblock %}

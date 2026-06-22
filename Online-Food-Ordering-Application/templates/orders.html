@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container my-5">
+
+    <h2 class="fw-bold text-center mb-4">My Orders</h2>
+
+    {% if orders %}
+        <table class="table table-bordered text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Order ID</th>
+                    <th>Total</th>
+                    <th>Date</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for o in orders %}
+                <tr>
+                    <td>#{{ o.id }}</td>
+                    <td>₹{{ o.total }}</td>
+                    <td>{{ o.created_at.strftime('%d-%m-%Y %I:%M %p') }}</td>
+                    <td>
+                        <button class="btn btn-outline-primary btn-sm"
+                                onclick="showOrderDetails({{ o.id }})">
+                            Details
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Order Details Modal -->
+        <div class="modal fade" id="orderDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Order Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body" id="order-items-list">
+                <!-- Items will load here via JS -->
+            </div>
+
+            </div>
+        </div>
+        </div>
+
+    {% else %}
+        <h4 class="text-muted text-center">No orders found.</h4>
+    {% endif %}
+
+        <div class="text-center mt-3">
+            <a href="/" class="btn btn-primary">Back to Menu</a>
+        </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container my-5" style="max-width: 600px;">
+    <h2 class="text-center mb-4">My Profile</h2>
+
+    <div class="mb-3 text-center">
+        <h4>Welcome, {{ user.name }}</h4>
+    </div>
+
+    <form method="POST">
+        <div class="mb-3">
+            <label class="form-label">Phone Number</label>
+            <input type="text"
+                   class="form-control"
+                   name="phone"
+                   value="{{ user.phone or '' }}"
+                   placeholder="Enter phone number">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Address</label>
+            <textarea class="form-control"
+                      name="address"
+                      rows="4"
+                      placeholder="Enter delivery address">{{ user.address or '' }}</textarea>
+        </div>
+
+        <button class="btn btn-primary w-100">Save Profile</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container my-5">
+
+    <h2 class="fw-bold text-center mb-4">Order #{{ order.id }}</h2>
+
+    <h4 class="mb-3 text-center">Total: ₹{{ order.total }}</h4>
+    <h5 class="mb-4 text-center text-muted">
+        Date: {{ order.created_at.strftime('%d-%m-%Y %I:%M %p') if order.created_at else "N/A" }}
+    </h5>
+
+    <table class="table table-bordered text-center">
+        <thead class="table-dark">
+            <tr>
+                <th>Image</th>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for i in items %}
+            <tr>
+                <td>
+                    <img src="{{ url_for('static', filename=i.product.image) }}" width="70">
+                </td>
+                <td>{{ i.product.name }}</td>
+                <td>{{ i.quantity }}</td>
+                <td>₹{{ i.price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('admin_orders') }}" class="btn btn-secondary">
+            Back to Orders
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

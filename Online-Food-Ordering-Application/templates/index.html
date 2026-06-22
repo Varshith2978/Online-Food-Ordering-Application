@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- CATEGORY BUTTONS -->
+<div class="text-center mb-4">
+
+    <!-- ALL -->
+    <a href="/"
+       class="btn btn-outline-dark mx-1 {% if not request.args.get('category') %}active{% endif %}">
+        All
+    </a>
+
+    <!-- RICE -->
+    <a href="/?category=Rice"
+       class="btn btn-outline-dark mx-1 {% if request.args.get('category') == 'Rice' %}active{% endif %}">
+        Rice
+    </a>
+
+    <!-- BREAD -->
+    <a href="/?category=Bread"
+       class="btn btn-outline-dark mx-1 {% if request.args.get('category') == 'Bread' %}active{% endif %}">
+        Breads
+    </a>
+
+    <!-- SALAD -->
+    <a href="/?category=Salad"
+       class="btn btn-outline-dark mx-1 {% if request.args.get('category') == 'Salad' %}active{% endif %}">
+        Salads
+    </a>
+
+    <!-- DESSERT -->
+    <a href="/?category=Dessert"
+       class="btn btn-outline-dark mx-1 {% if request.args.get('category') == 'Dessert' %}active{% endif %}">
+        Desserts
+    </a>
+
+    <!-- BURGER -->
+    <a href="/?category=Burger"
+       class="btn btn-outline-dark mx-1 {% if request.args.get('category') == 'Burger' %}active{% endif %}">
+        Burgers
+    </a>
+
+    <!-- FRIES -->
+    <a href="/?category=Fries"
+       class="btn btn-outline-dark mx-1 {% if request.args.get('category') == 'Fries' %}active{% endif %}">
+        Fries
+    </a>
+
+    <!-- SHAWARMA -->
+    <a href="/?category=Shawarma"
+       class="btn btn-outline-dark mx-1 {% if request.args.get('category') == 'Shawarma' %}active{% endif %}">
+        Shawarma
+    </a>
+
+    <!-- NOODLES -->
+    <a href="/?category=Noodles"
+       class="btn btn-outline-dark mx-1 {% if request.args.get('category') == 'Noodles' %}active{% endif %}">
+        Noodles
+    </a>
+
+    <!-- WINGS -->
+    <a href="/?category=Wings"
+       class="btn btn-outline-dark mx-1 {% if request.args.get('category') == 'Wings' %}active{% endif %}">
+        Wings
+    </a>
+
+</div>
+
+
+
+<!-- PRODUCT LIST -->
+{% include "main.html" %}
+
+{% endblock %}

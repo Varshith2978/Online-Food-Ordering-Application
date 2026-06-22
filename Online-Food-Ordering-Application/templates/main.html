@@ -1,0 +1,79 @@
+<main class="flex-grow-1">
+
+    <!-- ✅ Veg / Non‑Veg FILTER -->
+    <div class="container mt-4 text-center">
+
+        <input type="radio" class="btn-check" name="filter" id="veg"
+               autocomplete="off" onclick="filterProducts('veg')">
+        <label class="btn btn-outline-success mx-2" for="veg">Veg</label>
+
+        <input type="radio" class="btn-check" name="filter" id="nonveg"
+               autocomplete="off" onclick="filterProducts('non-veg')">
+        <label class="btn btn-outline-danger mx-2" for="nonveg">Non‑Veg</label>
+
+        <input type="radio" class="btn-check" name="filter" id="all"
+               autocomplete="off" onclick="filterProducts('all')" checked>
+        <label class="btn btn-outline-secondary mx-2" for="all">Show All</label>
+
+    </div>
+
+    <!-- ✅ PRODUCTS -->
+    <div class="container my-5" id="menu">
+        <h2 class="text-center fw-bold mb-4">Dishes</h2>
+
+        <div class="row">
+            
+
+            {% for p in products %}
+            <div class="col-md-4 mb-4 product-card" data-type="{{ p.type }}">
+
+                <div class="card">
+
+                    <!--  IMAGE -->
+                    <img src="{{ url_for('static', filename=p.image) }}" class="card-img-top">
+
+                    <div class="card-body text-center">
+
+                        <!--  NAME -->
+                        <h5>{{ p.name }}</h5>
+
+                        <!--  CATEGORY (optional display) -->
+                        <p class="text-muted">{{ p.category }}</p>
+
+                        <!--  PRICE -->
+                        <h5 class="text-success">₹{{ p.price }}</h5>
+
+                        <!--  Quantity Selector -->
+                        <div class="d-flex justify-content-center align-items-center gap-2 my-3">
+
+                            <button class="btn btn-dark btn-sm"
+                                    onclick="changeQty(this, -1, '{{ p.id }}')">
+                                −
+                            </button>
+
+                            <span class="px-3 fw-bold" data-qty="1">1</span>
+
+                            <button class="btn btn-dark btn-sm"
+                                    onclick="changeQty(this, 1, '{{ p.id }}')">
+                                +
+                            </button>
+
+                        </div>
+
+                        <!--  Add to Cart -->
+                        <button class="btn btn-success w-100 fw-bold"
+                                onclick="addToCart(this, '{{ p.id }}')">
+                            ADD TO CART
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</main>
