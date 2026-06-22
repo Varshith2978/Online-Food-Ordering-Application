@@ -1,6 +1,6 @@
 1. Create Database--------
-CREATE DATABASE food_app;
-USE food_app;
+CREATE DATABASE " - ";  #enter your own database
+USE "  -  "; ##enter your own use
 
 2. Create users table-----------
 CREATE TABLE users (
